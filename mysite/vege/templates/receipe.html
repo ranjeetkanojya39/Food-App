@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block start %}
+
+<style>
+    /* Add Recipe Card Styling */
+    .recipe-card {
+        border-radius: 20px;
+        border: none;
+        background: #ffffff;
+    }
+    
+    .section-title {
+        font-weight: 700;
+        color: #2f3542;
+        position: relative;
+        display: inline-block;
+        margin-bottom: 30px;
+    }
+
+    .section-title::after {
+        content: '';
+        width: 50%;
+        height: 4px;
+        background: #ff4757;
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        border-radius: 10px;
+    }
+
+    /* Form Controls */
+    .form-label {
+        font-weight: 600;
+        color: #57606f;
+    }
+    
+    .form-control {
+        border-radius: 12px;
+        padding: 12px;
+        border: 1px solid #f1f2f6;
+        background: #f8f9fa;
+    }
+
+    .form-control:focus {
+        border-color: #ff4757;
+        box-shadow: 0 0 0 0.2rem rgba(255, 71, 87, 0.1);
+        background: #fff;
+    }
+
+    /* Table Styling */
+    .custom-table {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        border: none;
+    }
+
+    .custom-table thead {
+        background-color: #2f3542;
+        color: white;
+    }
+
+    .custom-table th {
+        padding: 15px;
+        font-weight: 500;
+        border: none;
+    }
+
+    .img-thumb {
+        height: 70px;
+        width: 80px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+
+    .img-thumb:hover {
+        transform: scale(1.1);
+    }
+
+    .btn-action {
+        border-radius: 8px;
+        padding: 6px 15px;
+        font-weight: 500;
+    }
+
+    /* Search Bar Styling */
+    .search-box {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+</style>
+
+<div class="container mt-5 pb-5">
+    
+    <div class="row">
+        <div class="col-lg-5 mb-5">
+            <h3 class="section-title">Add New Recipe</h3>
+            <form class="card recipe-card p-4 shadow-sm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}         
+                <div class="mb-3">
+                    <label class="form-label">Recipe Name</label>
+                    <input name="receipe_name" type="text" class="form-control" placeholder="e.g. Paneer Butter Masala" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea name="receipe_description" class="form-control" rows="4" placeholder="Describe your dish..." required></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Food Image</label>
+                    <input name="receipe_image" type="file" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-danger w-100 py-2 fw-bold rounded-pill">
+                    <i class="fas fa-plus-circle me-2"></i>Post Recipe
+                </button>
+            </form>
+        </div>
+
+        <div class="col-lg-7">
+            <h3 class="section-title">Manage Recipes</h3>
+
+            <div class="search-box mb-4">
+                <form class="d-flex gap-2">
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0 text-muted"><i class="fas fa-search"></i></span>
+                        <input name="search" type="text" class="form-control bg-light border-0" 
+                               placeholder="Search your food..." value="{{ request.GET.search }}">
+                    </div>
+                    <button type="submit" class="btn btn-dark px-4 rounded-pill">Search</button>
+                </form>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table custom-table align-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Dish</th>
+                            <th>Image</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        {% for receipe in receipes %}
+                        <tr>
+                            <td class="fw-bold text-muted">{{ forloop.counter }}</td>
+                            <td>
+                                <div class="fw-bold">{{ receipe.receipe_name }}</div>
+                                <div class="small text-muted text-truncate" style="max-width: 150px;">
+                                    {{ receipe.receipe_description }}
+                                </div>
+                            </td>
+                            <td>
+                                {% if receipe.receipe_image %}
+                                    <img class="img-thumb" src="{{ receipe.receipe_image.url }}">
+                                {% else %}
+                                    <span class="badge bg-light text-dark">No Image</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="/update_receipe/{{ receipe.id }}" class="btn btn-outline-success btn-sm btn-action">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="/delete_receipe/{{ receipe.id }}" class="btn btn-outline-danger btn-sm btn-action">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center py-4 text-muted">No recipes found. Start adding some!</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

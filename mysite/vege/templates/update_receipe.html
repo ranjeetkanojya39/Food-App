@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block start %}
+
+<style>
+.img-thumb{
+    height: 100px;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    padding: 3px;
+    transition: 0.3s ease-in-out;
+}
+.img-thumb:hover{
+    transform: scale(1.1);
+    border-color: #ff5252;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+}
+</style>
+
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">Update Receipe</h2>
+    
+
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        <div class="mb-3">
+            <label class="form-label">Receipe Name</label>
+            <input name="receipe_name" value="{{receipe.receipe_name}}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Receipe Description</label>
+            <textarea name="receipe_description" class="form-control" rows="4">{{ receipe.receipe_description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Receipe Image</label><br>
+
+            {% if receipe.receipe_image %}
+                <img src="{{ receipe.receipe_image.url }}" class="img-thumb mb-2" alt="Current Image"><br>
+            {% endif %}
+
+            <input name="receipe_image" type="file" class="form-control mt-2">
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Receipe</button>
+    </form>
+
+</div>
+
+{% endblock %}

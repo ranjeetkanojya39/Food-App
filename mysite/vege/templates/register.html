@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block start %}
+
+<style>
+    .register-container {
+        background: #f8f9fa;
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        padding: 40px 0;
+    }
+
+    .register-card {
+        border-radius: 20px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+    }
+
+    .register-header {
+        /* Food App Theme Gradient */
+        background: linear-gradient(135deg, #ff4757, #ff6b81);
+        color: white;
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    .register-header h2 {
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .register-header p {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2f3542;
+        font-size: 0.9rem;
+    }
+
+    .form-control {
+        border-radius: 12px;
+        border: 1px solid #edeff2;
+        padding: 12px 15px;
+        background-color: #f1f2f6;
+        transition: 0.3s;
+    }
+
+    .form-control:focus {
+        background-color: #fff;
+        border-color: #ff4757;
+        box-shadow: 0 0 0 0.2rem rgba(255, 71, 87, 0.1);
+    }
+
+    .btn-custom {
+        background: #ff4757;
+        color: white;
+        border: none;
+        width: 100%;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.4s;
+        margin-top: 20px;
+    }
+
+    .btn-custom:hover {
+        background: #e84118;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+        color: white;
+    }
+
+    .input-icon-wrapper {
+        position: relative;
+    }
+
+    .input-icon-wrapper i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ff4757;
+    }
+
+    .input-icon-wrapper input {
+        padding-left: 45px;
+    }
+
+    .login-link {
+        color: #ff4757;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .login-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="register-container">
+    <div class="container">
+        <form class="col-lg-5 col-md-8 mx-auto card register-card p-0" method="post">
+            {% csrf_token %}
+            
+            <div class="register-header">
+                <h2>Join Foodie!</h2>
+                <p>Create an account to start ordering</p>
+            </div>
+
+            <div class="p-4 p-md-5">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">First Name</label>
+                        <div class="input-icon-wrapper">
+                            <i class="bi bi-person"></i>
+                            <input type="text" class="form-control" name="first_name" placeholder="John" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Last Name</label>
+                        <div class="input-icon-wrapper">
+                            <i class="bi bi-person"></i>
+                            <input type="text" class="form-control" name="last_name" placeholder="Doe" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <div class="input-icon-wrapper">
+                        <i class="bi bi-at"></i>
+                        <input type="text" class="form-control" name="username" placeholder="johndoe123" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <div class="input-icon-wrapper">
+                        <i class="bi bi-shield-lock"></i>
+                        <input type="password" class="form-control" name="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="form-check small mb-3">
+                    <input class="form-check-input" type="checkbox" id="terms" required>
+                    <label class="form-check-label text-muted" for="terms">
+                        I agree to the Terms & Conditions
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-custom">Create Account</button>
+
+                <p class="text-center mt-4 mb-0 text-muted">
+                    Already a member?
+                    <a href="/login/" class="login-link">Login here</a>
+                </p>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+{% endblock %}

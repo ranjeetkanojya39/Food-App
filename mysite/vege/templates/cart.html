@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block start %}
+
+<style>
+    .cart-container {
+        background-color: #f8f9fa;
+        min-height: 90vh;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .cart-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .cart-item-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        background: #f1f2f6;
+        border-radius: 8px;
+        padding: 2px;
+    }
+    .btn-qty {
+        background: white;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        font-weight: bold;
+        color: #ff4757;
+    }
+    .summary-box {
+        background: #fff;
+        border-radius: 15px;
+        padding: 25px;
+        position: sticky;
+        top: 100px;
+    }
+    .checkout-btn {
+        background-color: #ff4757;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+    .checkout-btn:hover {
+        background-color: #e84118;
+        transform: translateY(-2px);
+        color: white;
+    }
+</style>
+
+<div class="cart-container">
+    <div class="container">
+        <h2 class="fw-bold mb-4">My Shopping Cart <span class="text-muted fs-5">(3 Items)</span></h2>
+        
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card cart-card p-3 mb-3">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-3 col-md-2">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200" class="cart-item-img" alt="food">
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <h5 class="fw-bold mb-1">Classic Cheeseburger</h5>
+                            <p class="text-muted small mb-0">Extra cheese, No onions</p>
+                            <h6 class="text-danger fw-bold mt-2">₹249</h6>
+                        </div>
+                        <div class="col-3 col-md-4 text-end">
+                            <div class="d-inline-flex quantity-control">
+                                <button class="btn-qty">-</button>
+                                <span class="px-3 fw-bold">1</span>
+                                <button class="btn-qty">+</button>
+                            </div>
+                            <div class="mt-2">
+                                <a href="#" class="text-muted small text-decoration-none"><i class="fas fa-trash me-1"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row align-items-center mb-4">
+                        <div class="col-3 col-md-2">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=200" class="cart-item-img" alt="food">
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <h5 class="fw-bold mb-1">Margherita Pizza</h5>
+                            <p class="text-muted small mb-0">Medium | Fresh Crust</p>
+                            <h6 class="text-danger fw-bold mt-2">₹399</h6>
+                        </div>
+                        <div class="col-3 col-md-4 text-end">
+                            <div class="d-inline-flex quantity-control">
+                                <button class="btn-qty">-</button>
+                                <span class="px-3 fw-bold">2</span>
+                                <button class="btn-qty">+</button>
+                            </div>
+                            <div class="mt-2">
+                                <a href="#" class="text-muted small text-decoration-none"><i class="fas fa-trash me-1"></i> Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/" class="btn btn-link text-danger text-decoration-none fw-bold">
+                    <i class="fas fa-arrow-left me-2"></i> Continue Shopping
+                </a>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="summary-box shadow-sm">
+                    <h4 class="fw-bold mb-4">Order Summary</h4>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Subtotal</span>
+                        <span class="fw-bold">₹1047</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Delivery Fee</span>
+                        <span class="text-success fw-bold">FREE</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="text-muted">Taxes (GST)</span>
+                        <span class="fw-bold">₹52</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-4">
+                        <span class="h5 fw-bold">Total</span>
+                        <span class="h5 fw-bold text-danger">₹1099</span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold">Apply Coupon</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control border-end-0" placeholder="FOOD50">
+                            <button class="btn btn-dark px-3">Apply</button>
+                        </div>
+                    </div>
+
+                    <button class="btn checkout-btn w-100">
+                        Proceed to Checkout <i class="fas fa-chevron-right ms-2"></i>
+                    </button>
+                    
+                    <div class="text-center mt-3">
+                        <img src="https://cdn-icons-png.flaticon.com/512/349/349221.png" width="40" class="mx-1" alt="visa">
+                        <img src="https://cdn-icons-png.flaticon.com/512/349/349228.png" width="40" class="mx-1" alt="mastercard">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4341/4341764.png" width="40" class="mx-1" alt="upi">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block start %}
+
+<style>
+    .detail-container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        background-color: #fff;
+    }
+    .food-img-large {
+        width: 100%;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        object-fit: cover;
+        max-height: 500px;
+    }
+    .badge-veg {
+        border: 2px solid #2ecc71;
+        color: #2ecc71;
+        padding: 2px 5px;
+        font-size: 10px;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+    .price-tag {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ff4757;
+    }
+    .ingredient-icon {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 15px;
+        text-align: center;
+        transition: 0.3s;
+    }
+    .ingredient-icon:hover {
+        background: #fff2f2;
+        transform: translateY(-5px);
+    }
+    .btn-add-cart {
+        background-color: #ff4757;
+        color: white;
+        padding: 15px 40px;
+        border-radius: 15px;
+        font-weight: 600;
+        border: none;
+        transition: 0.3s;
+    }
+    .btn-add-cart:hover {
+        background-color: #e84118;
+        box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
+        color: white;
+    }
+</style>
+
+<div class="detail-container">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <div class="col-md-6 mb-4">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800" alt="Food Large" class="food-img-large">
+            </div>
+
+            <div class="col-md-6 ps-md-5">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="badge-veg"><i class="fas fa-circle"></i></span>
+                    <span class="text-muted fw-bold">BESTSELLER</span>
+                </div>
+                
+                <h1 class="display-5 fw-bold mb-3">Classic Cheeseburger</h1>
+                
+                <div class="d-flex align-items-center mb-4">
+                    <div class="text-warning me-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="fw-bold">4.8</span>
+                    <span class="text-muted ms-2">(1.2k Reviews)</span>
+                </div>
+
+                <p class="text-muted lead mb-4">
+                    Juicy grilled beef patty topped with melted cheddar cheese, fresh lettuce, tomatoes, 
+                    and our secret house sauce, served in a toasted brioche bun.
+                </p>
+
+                <div class="price-tag mb-4">₹249</div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">Select Size:</h6>
+                    <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="size" id="small" autocomplete="off">
+                        <label class="btn btn-outline-danger px-4" for="small">Regular</label>
+
+                        <input type="radio" class="btn-check" name="size" id="medium" autocomplete="off" checked>
+                        <label class="btn btn-outline-danger px-4" for="medium">Medium</label>
+
+                        <input type="radio" class="btn-check" name="size" id="large" autocomplete="off">
+                        <label class="btn btn-outline-danger px-4" for="large">Large</label>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3 align-items-center mt-5">
+                    <div class="input-group" style="width: 130px;">
+                        <button class="btn btn-outline-secondary">-</button>
+                        <input type="text" class="form-control text-center border-secondary" value="1">
+                        <button class="btn btn-outline-secondary">+</button>
+                    </div>
+                    <button class="btn btn-add-cart flex-grow-1">
+                        Add to Cart <i class="fas fa-shopping-bag ms-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 pt-5">
+            <h3 class="fw-bold mb-4">Main Ingredients</h3>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="ingredient-icon">
+                    <i class="fas fa-bread-slice fa-2x text-warning"></i>
+                    <p class="mt-2 mb-0 fw-bold">Brioche</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="ingredient-icon">
+                    <i class="fas fa-cheese fa-2x text-warning"></i>
+                    <p class="mt-2 mb-0 fw-bold">Cheddar</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="ingredient-icon">
+                    <i class="fas fa-leaf fa-2x text-success"></i>
+                    <p class="mt-2 mb-0 fw-bold">Lettuce</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="ingredient-icon">
+                    <i class="fas fa-pepper-hot fa-2x text-danger"></i>
+                    <p class="mt-2 mb-0 fw-bold">Beef</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
